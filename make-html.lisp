@@ -4,7 +4,8 @@
 		 (if xs
 			 (recur (cdr (cdr xs))
 					(format nil "~A<td style=\"text-align: ~A;\"~A<\td>" str (car xs) (cadr xs)))
-			 (format nil "~A</tr>" str))
-))
-	(recur xs "<tr>")
-))
+			 (format nil "~A</tr>" str))))
+	(recur xs "<tr>")))
+
+(defun table (xs &optional (border "1") (cellspacing "0") (cellpadding "6px") (width nil) (height nil))
+	
