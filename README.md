@@ -1,6 +1,4 @@
-Piazza-Tools
+Piazza Tools
 ============
 
-Personal tools for making Piazza posts.
-
-Test
+A collection of tools that help create HTML posts for Piazza.
