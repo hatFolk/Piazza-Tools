@@ -3,8 +3,8 @@
 	  ((recur (xs str)
 		 (if xs
 			 (recur (cdr (cdr xs))
-					(format nil "~A<td style=\"text-align: ~A;\"~A<\\td>" str (car xs) (cdr (car xs))))
-			 (format nil "~A<//tr>" str))
+					(format nil "~A<td style=\"text-align: ~A;\"~A<\td>" str (car xs) (cadr xs)))
+			 (format nil "~A</tr>" str))
 ))
 	(recur xs "<tr>")
 ))
