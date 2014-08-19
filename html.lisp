@@ -1,11 +1,14 @@
 ;; A translation of HTML tags to Common Lisp.
-
+; Explanation of Param names:
+; 	name := Name of the tag
+;	entry/str := A string that is being manipulated to be incorporated to be tagged.
+; 	css := CSS oneliners for insertion into the style attribute
+;	attribs := Valid HTML additions
 ;; Notes to self: Determine if incorporation of all Global Attributes necessary.
 
 (defun tag-template (name entry &optional css attribs)
   "Makes all sorts of tags. style is either nil or a valid string of css."
-  (cond ((and (not css) (not attribs))
-	  (format nil "<~A>~A<\\~A>" name entry name))
+  (cond ((and (not css) (not attribs))(format nil "<~A>~A<\\~A>" name entry name))
 		((and (not css) attribs)
 		 (format nil "<~A ~A>~A<\\~A>" name attribs entry name))
 		((and css (not attribs))
@@ -62,7 +65,7 @@
   (tag-template "ol" (reduce #'concatenate (map 'string #'(lambda (x) (li x)) xs)) css attribs))
 
 (defun pre (str &optional css attribs)
-  (tag-template "pre" css attribs))
+  (tag-template "pre" str css attribs))
 
 (defun p (str &optional css attribs)
   (tag-template "p" str css attribs))
