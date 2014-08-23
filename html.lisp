@@ -6,6 +6,13 @@
 ;	attribs := Valid HTML additions
 ;; Notes to self: Determine if incorporation of all Global Attributes necessary.
 
+(defmacro new-tag (name)
+  (let ((entry-name (gensym))
+		(css-name (gensym))
+		(attribs-name (gensym)))
+	`(defun ,(intern (string-upcase name)) (,entry-name &optional ,css-name ,attribs-name)
+	   (tag-template ,name ,entry-name ,css-name ,attribs-name))))
+
 (defun tag-template (name entry &optional css attribs)
   "Makes all sorts of tags. style is either nil or a valid string of css."
   (cond ((and (not css) (not attribs))(format nil "<~A>~A<\\~A>" name entry name))
@@ -25,11 +32,11 @@
 
 (defun table (entry &optional css attribs)
   "Generates <table> entries with styles"
-  (tag-template  "table" entry css attribs ))
+  (tag-template  "table" entry css attribs))
 
 (defun a (entry &optional css attribs)
   "Generates a tags. attribs is a string containing valid html attributes like href, hreflang, etc."
-  (tag-template  "a" entry css attribs ))
+  (tag-template  "a" entry css attribs))
 
 (defun simple-url (url entry &optional css)
   (a entry css (format nil "href=\"~A\"" url)))
@@ -58,7 +65,9 @@
 (defun li (x &optional css attribs)
   (tag-template "li" x css attribs))
 
-(defun ul (xs &optional css attribs)
+(defun render-html () "...")
+
+(defun ul (xs &key css attribs)
   (tag-template "ul" (reduce #'concatenate (map 'string #'(lambda (x) (li x)) xs)) css attribs))
 
 (defun ol (xs &optional css attribs)
@@ -69,3 +78,6 @@
 
 (defun p (str &optional css attribs)
   (tag-template "p" str css attribs))
+
+(defun str-concat (&rest xs)
+  )
